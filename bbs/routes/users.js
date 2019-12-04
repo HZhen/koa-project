@@ -1,13 +1,15 @@
 const router = require('koa-router')()
+const ArtileController = require('../controllers/article');
 
-router.prefix('/users')
+router.prefix('/api/v1')
 
-router.get('/', function (ctx, next) {
-  ctx.body = 'this is a users response!'
-})
+/**
+ * 文章接口
+ */
+//创建文章
+router.post('/article/create',ArtileController.create);
 
-router.get('/bar', function (ctx, next) {
-  ctx.body = 'this is a users/bar response'
-})
+//获取文章详情
+router.get('/article/:id',ArtileController.detail)
 
 module.exports = router

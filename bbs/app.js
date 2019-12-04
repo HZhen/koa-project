@@ -8,10 +8,12 @@ const logger = require('koa-logger')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+const cors = require('koa-cors')
 
 // error handler
 onerror(app)
 
+app.use(cors()) //使用cors
 // middlewares
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
@@ -31,6 +33,7 @@ app.use(async (ctx, next) => {
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
+
 
 // routes
 app.use(index.routes(), index.allowedMethods())
